@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.teleop;
 
-import com.acmerobotics.roadrunner.geometry.Pose2d;
+import com.acmerobotics.roadrunner.geometry.Pose2d;//from lines 3-14 you are importing all the things you will need(Aarav Garg)
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -13,11 +13,11 @@ import org.firstinspires.ftc.teamcode.drive.SampleMecanumDrive;
 
 import java.util.*;
 
-@TeleOp(name = "PowerPlay First Bot", group = "TestBot")
+@TeleOp(name = "PowerPlay First Bot", group = "TestBot")//Teleop code starts and the assets are being named(Aarav Garg)
 public class FirstBot extends LinearOpMode {
     SampleMecanumDrive drive;
 
-    DcMotor liftL = null;
+    DcMotor liftL = null;//from lines 20-28 you are initializing all of the servo's and DC motors(Aarav Garg)
     DcMotor liftR = null;
     DcMotor liftT = null;
 
@@ -27,14 +27,14 @@ public class FirstBot extends LinearOpMode {
 
     DcMotor turretR = null;
 
-    Gamepad g1 = gamepad1;
+    Gamepad g1 = gamepad1;//initializing gamepad 1 and 2(Aarav Garg)
     Gamepad g2 = gamepad2;
 
     double extensionPos = Constants.extendInPos;
     double extensionRange = Constants.extendOutPos - Constants.extendInPos;
     boolean isHolding = false;
 
-    int holdPos = 0;
+    int holdPos = 0;//intializing values for holdPos to 0(Aarav Garg)
 
     @Override
     public void runOpMode() throws InterruptedException {
@@ -42,12 +42,12 @@ public class FirstBot extends LinearOpMode {
             module.setBulkCachingMode(LynxModule.BulkCachingMode.AUTO);
         }
 
-        g1 = gamepad1; //Defining gamepads Aarav Mehta
+        g1 = gamepad1; //Defining gamepads Aarav Mehta //Defining variables for gamepad 1 and gamepad 2(Aarav Garg)
         g2 = gamepad2; 
 
         Constants.initHardware(hardwareMap);
 
-        liftL = Constants.liftL;
+        liftL = Constants.liftL;//variables for all the DC 
         liftR = Constants.liftR;
         liftT = Constants.liftT;
 
@@ -89,7 +89,7 @@ public class FirstBot extends LinearOpMode {
             Constants.setLift(holdPos, Constants.liftPower);
         }
         // if neither a nor y are pressed, the right joystick will be controlling lift
-        if (!g2.dpad_down && !g2.dpad_up && !g2.a && !g2.y && !g2.dpad_left && Math.abs(g2.left_stick_x) < 0.2) {
+        if (!g2.dpad_down && !g2.dpad_up && !g2.a && !g2.y && !g2.dpad_left && Math.abs(g2.left_stick_x) < 0.2) {//if both and y are not pressed then lift L lift R and Lift T will be controlled by right joystick(Aarav Garg)
             liftL.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             liftR.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             liftT.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -203,12 +203,12 @@ public class FirstBot extends LinearOpMode {
 //        extend.setPosition((1 - extensionValue) * (Constants.extendInPos - Constants.extendOutPos) + Constants.extendOutPos);
 
         if (gamepad2.right_trigger <= 1)
-            extensionPos += (extensionRange * gamepad2.right_trigger * 0.03);
+            extensionPos += (extensionRange * gamepad2.right_trigger * 0.03);//the extension will slowly go outward(Aarav Garg)
 //        else if (gamepad2.right_trigger == 1)
 //            extensionPos = Constants.extendOutPos;
 
         if (gamepad2.left_trigger < 1)
-            extensionPos -= (extensionRange * gamepad2.left_trigger * 0.03);
+            extensionPos -= (extensionRange * gamepad2.left_trigger * 0.03);//the extension will slowly come inwards(Aarav Garg)
         else if (gamepad2.left_trigger == 1)
             extensionPos = Constants.extendInPos;
 
